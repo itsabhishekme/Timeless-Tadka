@@ -1,65 +1,205 @@
-import Image from "next/image";
+import Hero from "@/components/hero/Hero";
+import RecipeCard from "@/components/recipe/RecipeCard";
+import CategoryCard from "@/components/category/CategoryCard";
+import SpiceCard from "@/components/spice/SpiceCard";
+import FestivalCard from "@/components/festival/FestivalCard";
 
-export default function Home() {
+type FeaturedRecipe = {
+  id: string;
+  title: string;
+  image: string;
+  slug: string;
+  category: string;
+  time: string;
+  region: string;
+  cookingTime: string;
+  difficulty: "Medium" | "Easy" | "Hard";
+  servings: number;
+  description: string;
+};
+
+export default function HomePage() {
+  const featuredRecipes: FeaturedRecipe[] = [
+    {
+      id: "butter-chicken-1",
+      title: "Butter Chicken",
+      image: "/recipes/butter-chicken.jpg",
+      slug: "butter-chicken",
+      category: "North Indian",
+      time: "45 Min",
+      region: "Punjab",
+      cookingTime: "45 Min",
+      difficulty: "Medium",
+      servings: 4,
+      description: "Creamy tomato-based chicken curry.",
+    },
+    {
+      id: "masala-dosa-1",
+      title: "Masala Dosa",
+      image: "/recipes/masala-dosa.jpg",
+      slug: "masala-dosa",
+      category: "South Indian",
+      time: "35 Min",
+      region: "Karnataka",
+      cookingTime: "35 Min",
+      difficulty: "Easy",
+      servings: 2,
+      description: "Crispy rice crepe stuffed with spiced potatoes.",
+    },
+    {
+      id: "dal-baati-1",
+      title: "Dal Baati Churma",
+      image: "/recipes/dal-baati.jpg",
+      slug: "dal-baati-churma",
+      category: "Rajasthani",
+      time: "60 Min",
+      region: "Rajasthan",
+      cookingTime: "60 Min",
+      difficulty: "Hard",
+      servings: 4,
+      description: "Hearty dal served with baked wheat balls and sweet churma.",
+    },
+  ];
+
+  const categories = [
+    "Breakfast",
+    "Lunch",
+    "Dinner",
+    "Street Food",
+    "Desserts",
+    "Festival Special",
+  ];
+
+  const spices = [
+    "Turmeric",
+    "Cardamom",
+    "Cumin",
+    "Cloves",
+    "Black Pepper",
+    "Saffron",
+  ];
+
+  const festivals = [
+    "Diwali",
+    "Holi",
+    "Navratri",
+    "Onam",
+    "Pongal",
+    "Eid",
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Hero />
+
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mb-12 text-center">
+          <h2 className="text-4xl font-bold">
+            Featured Traditional Recipes
+          </h2>
+
+          <p className="mt-4 text-gray-600">
+            Discover India's most loved homemade recipes.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {featuredRecipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              id={recipe.id}
+              slug={recipe.slug}
+              title={recipe.title}
+              image={recipe.image}
+              category={recipe.category}
+              region={recipe.region}
+              cookingTime={recipe.cookingTime}
+              difficulty={recipe.difficulty}
+              description={recipe.description}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="bg-amber-50 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-bold">
+              Browse by Category
+            </h2>
+
+            <p className="mt-4 text-gray-600">
+              Explore recipes by meal and cuisine.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6">
+            {categories.map((category) => (
+              <CategoryCard
+                key={category}
+                title={category} description={""} image={""} slug={""}              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-20">
+        <div className="mb-12 text-center">
+          <h2 className="text-4xl font-bold">
+            Authentic Indian Spices
+          </h2>
+
+          <p className="mt-4 text-gray-600">
+            The soul of Indian cooking begins with spices.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6">
+          {spices.map((spice) => (
+            <SpiceCard
+              key={spice}
+              name={spice}
+              description=""
+              image=""
+              slug={spice.toLowerCase().replace(/\s+/g, "-")} id={""} origin={""} benefits={[]}            />
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-orange-50 py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl font-bold">
+              Festival Special Recipes
+            </h2>
+
+            <p className="mt-4 text-gray-600">
+              Celebrate every festival with authentic traditional dishes.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6">
+            {festivals.map((festival) => (
+              <FestivalCard
+                key={festival}
+                title={festival} id={""} festival={""} description={""} image={""} slug={""}              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-6 py-24 text-center">
+        <h2 className="text-5xl font-bold">
+          Preserving India's Culinary Heritage
+        </h2>
+
+        <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-gray-600">
+          Timeless Tadka is more than a recipe platform. It is a celebration
+          of India's culinary traditions, forgotten family recipes, regional
+          cuisines, authentic spices, and the stories passed from one
+          generation to another.
+        </p>
+      </section>
+    </>
   );
 }
