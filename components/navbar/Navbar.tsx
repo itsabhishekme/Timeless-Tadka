@@ -12,8 +12,6 @@ const navigation = [
   { name: "Spices", href: "/spices" },
   { name: "Traditions", href: "/traditions" },
   { name: "Festivals", href: "/festivals" },
-  { name: "Stories", href: "/stories" },
-  { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
 
